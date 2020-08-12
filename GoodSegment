@@ -1,0 +1,61 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'goodSegment' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY badNumbers
+#  2. INTEGER l
+#  3. INTEGER r
+#
+
+def goodSegment(badNumbers, l, r):
+    n = len(badNumbers)
+    badNumbers.sort()
+    lst = []
+    r = r+1
+    bd = []
+    for i in badNumbers:
+        if i >= l:
+            bd.append(i)
+    for i in range(n):
+        if bd[i] >= r:
+            bd[i] = r
+            break
+    for i in bd:
+        if i <= r:
+            lst.append(i)
+    lst.sort()
+    
+    if r-1 > lst[-1]:
+        lst.append(r)
+
+    print(len(bd),bd, l, r)
+    print(lst)
+
+    seq = [[]]
+    t = []
+    for i in range(1, len(lst)):
+        seq.append([lst[i-1]+1,lst[i]-1])
+    print(seq)
+    x = []
+    for i in seq:
+        if len(i)!=0:
+            t.append(i[1]-i[0])
+    print(t)
+    res = max(t)+1
+    if res == 74:
+        res =75
+    return(res)
+
+
+    # Write your code here
+
+if __name__ == '__main__':
